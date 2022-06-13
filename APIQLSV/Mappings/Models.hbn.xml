@@ -1,0 +1,61 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" auto-import="true" assembly="APIQLSV" namespace="APIQLSV.Models.Base">
+	<class name="BaseSinhVien" table="SINHVIEN">
+		<id name="MaSV" column="MASV">
+			<generator class="native" />
+		</id>
+		<property name="TenSV" column="TENSV" />
+		<property name="GioiTinh" column="GIOITINH" />
+		<property name="DOB" column="NGAYSINH" />
+		<property name="Lop" column="LOP" />
+		<property name="Khoa" column="KHOA" />
+	</class>
+	<class name="BaseDiem" table="SinhvienMonhoc">
+		<composite-id>
+			<key-property name="MaSV" column="MASV" />
+			<key-property name="MaMH" column="MAMH" />
+		</composite-id>
+		<property name="DiemQT" column="DIEMQT" />
+		<property name="DiemTP" column="DIEMTP" />
+	</class>
+	<class name="BaseMonHoc" table="MONHOC">
+		<id name="MaMH" column="MAMH">
+			<generator class="native" />
+		</id>
+		<property name="TenMH" column="TENMH" />
+		<property name="SoTiet" column="SOTIET" />
+	</class>
+	<class name="SinhVien" table="SINHVIEN">
+		<id name="MaSV" column="MASV">
+			<generator class="native" />
+		</id>
+		<property name="TenSV" column="TENSV" />
+		<property name="GioiTinh" column="GIOITINH" />
+		<property name="DOB" column="NGAYSINH" />
+		<property name="Lop" column="LOP" />
+		<property name="Khoa" column="KHOA" />
+		<bag name="Diems" table="SinhvienMonhoc" cascade="all-delete-orphan" inverse="true" lazy="false">
+			<key column="MASV" />
+			<one-to-many class="Diem"/>
+		</bag>
+	</class>
+	<class name="MonHoc" table="MONHOC">
+		<id name="MaMH" column="MAMH">
+			<generator class="native" />
+		</id>
+		<property name="TenMH" column="TENMH" />
+		<property name="SoTiet" column="SOTIET" />
+		<bag name="Diems" table="SinhvienMonhoc" inverse="true" cascade="all-delete-orphan" lazy="false">
+			<key column="MAMH" />
+			<one-to-many class="BaseDiem"/>
+		</bag>
+	</class>
+	<class name="Diem" table="SinhvienMonhoc">
+		<composite-id>
+			<key-property name="MaSV" column="MASV" />
+			<key-many-to-one name="monhoc" class="BaseMonHoc" column="MAMH" lazy="false"/>
+		</composite-id>
+		<property name="DiemQT" column="DIEMQT" />
+		<property name="DiemTP" column="DIEMTP" />
+	</class>
+</hibernate-mapping>

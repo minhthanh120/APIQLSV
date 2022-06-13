@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" assembly="APIQLSV" namespace="APIQLSV.Models.DTO">
+	<class name="SinhVienDTO">
+		<cache usage="read-write"/>
+		<id name="MaSV" column="MaSV">
+			<generator class="native" />
+		</id>
+		<property name="TenSV" column="TenSV"/>
+		<property name="DOB" column="DOB"/>
+		<property name="GioiTinh" column="GioiTinh"/>
+		<property name="Lop" column="Lop"/>
+		<property name="Khoa" column="Khoa"/>
+		<property name="SoMon" column="SoMon"/>
+	</class>
+	<class name="MonHocDTO">
+		<cache usage="read-write"/>
+		<id name="MaMH" column="MAMH">
+			<generator class="native" />
+		</id>
+		<property name="TenMH" column="TENMH"/>
+		<property name="SoTiet" column="SOTIET"/>
+		<property name="DiemTP" column="DIEMTP"/>
+		<property name="DiemQT" column="DIEMQT"/>
+	</class>
+	<sql-query name="DANHSACHSINHVIEN" callable="true">
+		<return class="SinhVienDTO">
+			<return-property name="MaSV" column="MaSV"/>
+			<return-property name="TenSV" column="TenSV"/>
+			<return-property name="DOB" column="DOB"/>
+			<return-property name="GioiTinh" column="GioiTinh"/>
+			<return-property name="Lop" column="Lop"/>
+			<return-property name="Khoa" column="Khoa"/>
+			<return-property name="SoMon" column="SoMon"/>
+		</return>
+		EXECUTE dbo.DANHSACHSINHVIEN
+	</sql-query>
+	<sql-query name="DANHSACHDIEM" callable="true">
+		<query-param name="param" type="int"/>
+		<return class="MonHocDTO">
+			<return-property name="MaMH" column="MAMH"/>
+			<return-property name="TenMH" column="TENMH"/>
+			<return-property name="SoTiet" column="SOTIET"/>
+			<return-property name="DiemTP" column="DIEMTP"/>
+			<return-property name="DiemQT" column="DIEMQT"/>
+		</return>
+		EXECUTE DANHSACHDIEM :param
+	</sql-query>
+	<sql-query name="NHAPDIEM" callable="true">
+		execute NHAPDIEM :diemqt , :diemtp, :mamon, :masv
+	</sql-query>
+</hibernate-mapping>

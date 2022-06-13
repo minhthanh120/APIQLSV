@@ -1,0 +1,34 @@
+{
+  "maSV": 1,
+  "tenSV": "Nguyễn Văn A",
+  "dob": "1998-09-01T00:00:00",
+  "gioiTinh": "True",
+  "lop": "K17",
+  "khoa": "2021",
+  "diems": [
+    {
+      "sinhvien": null,
+      "monhoc": {
+        "maMH": 1,
+        "tenMH": "Giải tích",
+        "soTiet": 4
+      },
+      "maSV": 0,
+      "maMH": 0,
+      "diemQT": 0,
+      "diemTP": 0
+    },
+    {
+      "sinhvien": null,
+      "monhoc": {
+        "maMH": 2,
+        "tenMH": "Hình họa",
+        "soTiet": 2
+      },
+      "maSV": 0,
+      "maMH": 0,
+      "diemQT": 0,
+      "diemTP": 0
+    }
+  ]
+}
